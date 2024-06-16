@@ -238,6 +238,8 @@ local function route_to_i2p(event)
 		elseif not torify_all then
 			return;
 		end
+	else
+		to_host=string.match(to_host,"%w+.%w+.i2p");
 	end
 
 	module:log("debug", "i2p routing something to ".. to_host);
