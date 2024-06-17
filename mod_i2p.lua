@@ -219,10 +219,12 @@ local function bounce_sendq(session, reason)
 end
 -- Try to intercept anything to *.i2p
 local function route_to_i2p(event)
+	
 	local stanza = event.stanza;
 	local to_host = event.to_host;
 	local i2p_host = nil;
 	local i2p_port = nil;
+	local to_address = event.to_host;
 
 	if not to_host:find("%.i2p$") then
 		if i2p_map[to_host] then
@@ -239,14 +241,16 @@ local function route_to_i2p(event)
 			return;
 		end
 	else
-		to_host=string.match(to_host,"%w+.%w+.i2p");
+
+		to_address=string.match(to_host,"%w+.%w+.i2p");
 	end
 
 	module:log("debug", "i2p routing something to ".. to_host);
-
 	if hosts[event.from_host].s2sout[to_host] then
+		module:log("debug", "i2p connected ".. to_host);
 		return;
 	end
+
 
 	local host_session = s2s_new_outgoing(event.from_host, to_host);
 
@@ -255,7 +259,7 @@ local function route_to_i2p(event)
 
 	hosts[event.from_host].s2sout[to_host] = host_session;
 
-	connect_socks5(host_session, i2p_host or to_host, i2p_port or 5269);
+	connect_socks5(host_session, i2p_host or to_address, i2p_port or 5269);
 
 	return true;
 end
@@ -273,4 +277,3 @@ module:hook_global("s2s-check-certificate", function (event)
 		return true;
 	end
 end);
-
