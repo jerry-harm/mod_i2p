@@ -69,9 +69,12 @@ And if you want to register a domain of .i2p, you need to make hostname like som
 Compatibility
 =============
 
-  ----- --------------
-    working
-  ----- --------------
+
+|0.8 |	Doesn’t work|
+|-----|--------|
+|0.9 |	Works|
+
+*Not tested*, but should be like mod_onions
 
 Notes
 =====
