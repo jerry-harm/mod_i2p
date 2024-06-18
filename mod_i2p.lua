@@ -241,7 +241,7 @@ local function route_to_i2p(event)
 			return;
 		end
 	else
-
+		-- got real address
 		to_address=string.match(to_host,"%w+.%w+.i2p");
 	end
 
