@@ -32,11 +32,12 @@ Use the hostname that I2P gives with a virtualhost:
         modules_enabled = { "i2p" };
 
 And to use it for muc or other component,you should enable it like:
+```
     Component "conference.somethingbase32.b32.i2p" "muc"
     modules_enabled={
         "i2p";
     }
-
+```
 Configuration
 =============
 
